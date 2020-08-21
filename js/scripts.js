@@ -6,6 +6,21 @@
     (function ($) {
     "use strict"; // Start of use strict
 
+    $.ajax({
+      url: "https://www.googleapis.com/blogger/v3/blogs/2589956027087537220/posts?key=AIzaSyBsTuPBYxJU19Ur5423XRudeVJOr56A9Wo",
+      context: document.body
+    }).done(function(response) {
+        let latestPosts = response.items.slice(0, 4);
+        console.log(latestPosts)
+        latestPosts.forEach(function(post, index) {
+          console.log("post-"+index+"-title");
+          document.getElementById("post-"+index+"-title").innerHTML = response.items[index].title
+          document.getElementById("post-"+index+"-date").innerHTML = response.items[index].updated
+          document.getElementById("post-"+index+"-preview").innerHTML = response.items[index].content
+          document.getElementById("post-"+index+"-link").setAttribute("href", response.items[index].url)
+        })
+    });
+
     // Smooth scrolling using jQuery easing
     $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function () {
         if (
