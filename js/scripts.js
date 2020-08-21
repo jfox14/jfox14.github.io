@@ -11,11 +11,10 @@
       context: document.body
     }).done(function(response) {
         let latestPosts = response.items.slice(0, 4);
-        console.log(latestPosts)
         latestPosts.forEach(function(post, index) {
           console.log("post-"+index+"-title");
           document.getElementById("post-"+index+"-title").innerHTML = response.items[index].title
-          document.getElementById("post-"+index+"-date").innerHTML = response.items[index].updated
+          document.getElementById("post-"+index+"-date").innerHTML = moment(response.items[index].updated).format('MMMM DD, YYYY')
           document.getElementById("post-"+index+"-preview").innerHTML = response.items[index].content
           document.getElementById("post-"+index+"-link").setAttribute("href", response.items[index].url)
         })
